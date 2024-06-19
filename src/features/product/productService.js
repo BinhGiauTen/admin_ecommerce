@@ -12,8 +12,37 @@ const createProduct = async(product) =>{
     return response.data;
 }
 
+const getaProduct = async (id) => {
+    const response = await axios.get(`${base_url}product/${id}`);
+    return response.data;
+  };
+  
+  const updateProduct = async (product) => {
+    const response = await axios.put(
+      `${base_url}product/${product.id}`,
+      {
+        title: product.productData.title,
+        brand: product.productData.brand,
+        category: product.productData.category,
+        color: product.productData.color,
+        price: product.productData.price,
+        images: product.productData.images
+      },
+      config
+    );
+    return response.data;
+  };
+  
+  const deleteProduct = async (id) => {
+    const response = await axios.delete(`${base_url}product/${id}`, config);
+    return response.data;
+  };
+
 const productService = {
     getProducts,
-    createProduct
+    createProduct,
+    getaProduct,
+    deleteProduct,
+    updateProduct
 }
 export default productService;
